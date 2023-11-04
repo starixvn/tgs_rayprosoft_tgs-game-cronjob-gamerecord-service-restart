@@ -9,9 +9,6 @@ stages:
 
 push-migrations-k8s-template:
   stage: publish
-  needs:
-    - unit-test
-    - build-migrations-image
   script:
     - export Tag="$(date -d $CI_PIPELINE_CREATED_AT +%Y%m%d%H%M).$CI_PIPELINE_IID"
     - mkdir -p artifacts/k8s
