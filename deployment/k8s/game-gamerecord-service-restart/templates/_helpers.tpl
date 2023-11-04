@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "game-gameinterface-restart.name" -}}
+{{- define "game-gamerecord-service-restart.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "game-gameinterface-restart.fullname" -}}
+{{- define "game-gamerecord-service-restart.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "game-gameinterface-restart.chart" -}}
+{{- define "game-gamerecord-service-restart.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "game-gameinterface-restart.labels" -}}
-helm.sh/chart: {{ include "game-gameinterface-restart.chart" . }}
-{{ include "game-gameinterface-restart.selectorLabels" . }}
+{{- define "game-gamerecord-service-restart.labels" -}}
+helm.sh/chart: {{ include "game-gamerecord-service-restart.chart" . }}
+{{ include "game-gamerecord-service-restart.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "game-gameinterface-restart.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "game-gameinterface-restart.name" . }}
+{{- define "game-gamerecord-service-restart.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "game-gamerecord-service-restart.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "game-gameinterface-restart.serviceAccountName" -}}
+{{- define "game-gamerecord-service-restart.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "game-gameinterface-restart.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "game-gamerecord-service-restart.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "game-gameinterface-restart.fullname" . }}-restart
+  name: {{ include "game-gamerecord-service-restart.fullname" . }}-restart
 spec:
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 2
@@ -23,6 +23,6 @@ spec:
                 - bash
                 - -c
                 - >-
-                  kubectl rollout restart deployment/{{ include "game-gameinterface-restart.fullname" . }} &&
-                  kubectl rollout status deployment/{{ include "game-gameinterface-restart.fullname" . }}
+                  kubectl rollout restart deploy -l tgs.gamerecord.kind=service &&
+                  kubectl rollout status deployment -l tgs.gamerecord.kind=service
 {{- end }}

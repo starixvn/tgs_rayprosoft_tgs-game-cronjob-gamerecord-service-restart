@@ -1,5 +1,5 @@
 variables:
-  HelmTemplateFolderName: game-gameinterface-restart
+  HelmTemplateFolderName: game-gamerecord-service-restart
 
 stages:
   - deploy-dev
