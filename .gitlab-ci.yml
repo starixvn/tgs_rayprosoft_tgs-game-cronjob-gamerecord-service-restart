@@ -1,10 +1,30 @@
 variables:
   HelmTemplateFolderName: game-gamerecord-service-restart
 
+default:
+  before_script:
+    - export Tag="$(date -d $CI_PIPELINE_CREATED_AT +%Y%m%d%H%M).$CI_PIPELINE_IID"
+
 stages:
+  - publish
   - deploy-dev
   - deploy-staging
   - deploy-prod
+
+push-k8s-template:
+  stage: publish
+  only:
+    - main
+  script:
+    - export Tag="$(date -d $CI_PIPELINE_CREATED_AT +%Y%m%d%H%M).$CI_PIPELINE_IID"
+    - mkdir -p artifacts/k8s
+    - cp -R deployment/k8s/$HelmTemplateFolderName artifacts/k8s/
+  artifacts:
+    name: HelmTemplate
+    untracked: false
+    expire_in: "180 days"
+    paths:
+      - artifacts/**/*
 
 deploy-dev:
   variables:
@@ -13,9 +33,14 @@ deploy-dev:
   environment:
     name: dev
   stage: deploy-dev
+  needs:
+    - job: push-k8s-template
+      artifacts: true
   only:
     - main
   when: manual
+  before_script:
+    - export KUBECONFIG=$KubeConfig_Raypro_dev
   script:
     - |
       cat << EOF | yq e -P | helm template artifacts/k8s/$HelmTemplateFolderName \
@@ -37,9 +62,14 @@ deploy-staging:
   environment:
     name: staging
   stage: deploy-staging
+  needs:
+    - job: push-k8s-template
+      artifacts: true
   only:
     - main
   when: manual
+  before_script:
+    - export KUBECONFIG=$KubeConfig_Raypro_staging
   script:
     - |
       cat << EOF | yq e -P | helm template artifacts/k8s/$HelmTemplateFolderName \
@@ -61,9 +91,14 @@ deploy-prod:
   environment:
     name: prod
   stage: deploy-prod
+  needs:
+    - job: push-k8s-template
+      artifacts: true
   only:
     - main
   when: manual
+  before_script:
+    - export KUBECONFIG=$KubeConfig_Raypro_prod
   script:
     - |
       cat << EOF | yq e -P | helm template artifacts/k8s/$HelmTemplateFolderName \
