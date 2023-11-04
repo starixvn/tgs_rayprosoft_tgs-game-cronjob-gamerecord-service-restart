@@ -24,7 +24,7 @@ deploy-dev:
     - export KUBECONFIG=$KubeConfig_Raypro_dev
   script:
     - |
-      cat << EOF | yq e -P | helm template /k8s/$HelmTemplateFolderName \
+      cat << EOF | yq e -P | helm template /deployment/k8s/$HelmTemplateFolderName \
         -n $namespace \
         --name-template tgs \
         -f - 
@@ -50,7 +50,7 @@ deploy-staging:
     - export KUBECONFIG=$KubeConfig_Raypro_staging
   script:
     - |
-      cat << EOF | yq e -P | helm template /k8s/$HelmTemplateFolderName \
+      cat << EOF | yq e -P | helm template /deployment/k8s/$HelmTemplateFolderName \
         -n $namespace \
         --name-template tgs \
         -f - 
@@ -76,7 +76,7 @@ deploy-prod:
     - export KUBECONFIG=$KubeConfig_Raypro_prod
   script:
     - |
-      cat << EOF | yq e -P | helm template /k8s/$HelmTemplateFolderName \
+      cat << EOF | yq e -P | helm template /deployment/k8s/$HelmTemplateFolderName \
         -n $namespace \
         --name-template tgs \
         -f - 
