@@ -83,6 +83,6 @@ affinity: {}
 
 restart:
   enabled: false
-  serviceAccount: game-gameinterface-restarter
+  serviceAccount: game-gamerecord-service-restarter
   annotations: {}
   schedule: 0 0 * * *
