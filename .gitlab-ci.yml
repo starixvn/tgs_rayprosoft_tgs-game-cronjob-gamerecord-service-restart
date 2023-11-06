@@ -57,7 +57,8 @@ deploy-dev:
       cat << EOF | yq e -P | helm template artifacts/k8s/$HelmTemplateFolderName \
         -n $namespace \
         --name-template tgs \
-        -f - 
+        -f - \
+        | kubectl -n $namespace apply -f -
       {
         "restart": {
             "enabled": true,
@@ -98,7 +99,8 @@ deploy-staging:
       cat << EOF | yq e -P | helm template artifacts/k8s/$HelmTemplateFolderName \
         -n $namespace \
         --name-template tgs \
-        -f - 
+        -f - \
+        | kubectl -n $namespace apply -f -
       {
         "restart": {
             "enabled": true,
@@ -139,7 +141,8 @@ deploy-prod:
       cat << EOF | yq e -P | helm template artifacts/k8s/$HelmTemplateFolderName \
         -n $namespace \
         --name-template tgs \
-        -f - 
+        -f - \
+        | kubectl -n $namespace apply -f -
       {
         "restart": {
             "enabled": true,
