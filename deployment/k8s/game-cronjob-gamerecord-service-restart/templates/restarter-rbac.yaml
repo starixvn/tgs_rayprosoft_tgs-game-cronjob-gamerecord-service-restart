@@ -4,7 +4,7 @@ kind: ServiceAccount
 metadata:
   name: {{ .Values.restart.serviceAccount }}
   labels:
-    {{- include "game-gamerecord-service-restart.labels" . | nindent 4 }}
+    {{- include "game-cronjob-gamerecord-service-restart.labels" . | nindent 4 }}
   {{- with .Values.restart.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -13,9 +13,9 @@ metadata:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ include "game-gamerecord-service-restart.fullname" . }}-restart
+  name: {{ include "game-cronjob-gamerecord-service-restart.fullname" . }}
   labels:
-    {{- include "game-gamerecord-service-restart.labels" . | nindent 4 }}
+    {{- include "game-cronjob-gamerecord-service-restart.labels" . | nindent 4 }}
 rules:
   - apiGroups: 
       - apps
@@ -23,7 +23,7 @@ rules:
     resources: 
       - deployments
     resourceNames: 
-      - {{ include "game-gamerecord-service-restart.fullname" . }}
+      - {{ include "game-cronjob-gamerecord-service-restart.fullname" . }}
     verbs: 
       - get
       - patch
@@ -35,13 +35,13 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "game-gamerecord-service-restart.fullname" . }}-restart
+  name: {{ include "game-cronjob-gamerecord-service-restart.fullname" . }}
   labels:
-    {{- include "game-gamerecord-service-restart.labels" . | nindent 4 }}
+    {{- include "game-cronjob-gamerecord-service-restart.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ include "game-gamerecord-service-restart.fullname" . }}-restart
+  name: {{ include "game-cronjob-gamerecord-service-restart.fullname" . }}
 subjects:
   - kind: ServiceAccount
     name: {{ .Values.restart.serviceAccount }}

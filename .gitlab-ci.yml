@@ -1,5 +1,5 @@
 variables:
-  HelmTemplateFolderName: game-gamerecord-service-restart
+  HelmTemplateFolderName: game-cronjob-gamerecord-service-restart
 
 stages:
   - publish

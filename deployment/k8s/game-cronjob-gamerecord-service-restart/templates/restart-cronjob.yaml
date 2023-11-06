@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: {{ include "game-gamerecord-service-restart.fullname" . }}-restart
+  name: {{ include "game-cronjob-gamerecord-service-restart.fullname" . }}
 spec:
   successfulJobsHistoryLimit: 1
   failedJobsHistoryLimit: 2
