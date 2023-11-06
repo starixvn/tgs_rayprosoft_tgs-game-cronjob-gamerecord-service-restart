@@ -11,8 +11,8 @@ image:
   tag: ""
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "game-gamerecord-service-restart"
+fullnameOverride: "game-gamerecord-service-restart"
 
 serviceAccount:
   # Specifies whether a service account should be created

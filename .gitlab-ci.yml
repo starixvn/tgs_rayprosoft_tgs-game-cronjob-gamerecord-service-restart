@@ -37,7 +37,6 @@ deploy-dev:
       artifacts: true
   only:
     - main
-  when: manual
   before_script:
     - export KUBECONFIG=$KubeConfig_Raypro_dev
   script:
@@ -75,11 +74,11 @@ deploy-staging:
     name: staging
   stage: deploy-staging
   needs:
+    - deploy-dev
     - job: push-k8s-template
       artifacts: true
   only:
     - main
-  when: manual
   before_script:
     - export KUBECONFIG=$KubeConfig_Raypro_staging
   script:
@@ -117,6 +116,7 @@ deploy-prod:
     name: prod
   stage: deploy-prod
   needs:
+    - deploy-staging
     - job: push-k8s-template
       artifacts: true
   only:
