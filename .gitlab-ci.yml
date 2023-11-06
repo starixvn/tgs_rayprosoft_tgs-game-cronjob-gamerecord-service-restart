@@ -16,7 +16,6 @@ push-k8s-template:
     - mkdir -p artifacts/k8s
     - cp -R deployment/k8s/$HelmTemplateFolderName artifacts/k8s/
     - |
-      yq -i e '
       ' artifacts/k8s/$HelmTemplateFolderName/values.yaml
   artifacts:
     name: HelmTemplate
