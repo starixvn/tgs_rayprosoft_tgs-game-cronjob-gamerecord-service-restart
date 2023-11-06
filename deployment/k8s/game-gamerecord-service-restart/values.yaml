@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: IfNotPresent
+  repository: ""
+  pullPolicy: ""
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -83,6 +83,6 @@ affinity: {}
 
 restart:
   enabled: false
-  serviceAccount: game-gamerecord-service-restarter
+  serviceAccount: game-gamerecord-service-restart
   annotations: {}
   schedule: 0 0 * * *
