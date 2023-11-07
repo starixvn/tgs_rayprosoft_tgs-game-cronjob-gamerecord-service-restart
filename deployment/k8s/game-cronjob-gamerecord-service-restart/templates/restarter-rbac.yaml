@@ -22,8 +22,6 @@ rules:
       - extensions
     resources: 
       - deployments
-    resourceNames: 
-      - {{ include "game-cronjob-gamerecord-service-restart.fullname" . }}
     verbs: 
       - get
       - patch
