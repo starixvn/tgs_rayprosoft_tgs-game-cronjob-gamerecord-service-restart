@@ -19,32 +19,8 @@ metadata:
 rules:
   - apiGroups: 
       - apps
-      - extensions
     resources: 
       - deployments
-    resourceNames: 
-      - game-gamerecord-awc
-      - game-gamerecord-bti
-      - game-gamerecord-cards365
-      - game-gamerecord-dg
-      - game-gamerecord-evolution
-      - game-gamerecord-fachai
-      - game-gamerecord-habanero
-      - game-gamerecord-jdb
-      - game-gamerecord-jili
-      - game-gamerecord-joker
-      - game-gamerecord-ky
-      - game-gamerecord-ly
-      - game-gamerecord-obet
-      - game-gamerecord-pinnacle
-      - game-gamerecord-pp
-      - game-gamerecord-sbo
-      - game-gamerecord-sw
-      - game-gamerecord-tfgaming
-      - game-gamerecord-wgfm
-      - game-gamerecord-wgvia
-      - game-gamerecord-wmcasino
-      - game-gamerecord-yeebet
     verbs: 
       - get
       - patch

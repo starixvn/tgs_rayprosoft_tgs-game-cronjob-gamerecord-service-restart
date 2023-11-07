@@ -23,6 +23,6 @@ spec:
                 - bash
                 - -c
                 - >-
-                  kubectl rollout restart deployment -l tgs.gamerecord.kind=service &&
-                  kubectl rollout restart deployment -l tgs.gamerecord.kind=service
+                  kubectl -n {{ .Release.Namespace }} rollout restart deployment --selector "tgs.gamerecord.kind=service" &&
+                  kubectl -n {{ .Release.Namespace }} rollout status deployment  --selector "tgs.gamerecord.kind=service" 
 {{- end }}
